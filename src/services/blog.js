@@ -18,11 +18,11 @@ function createArticle(data) {
     content: data?.content || "",
   };
   const filePath = path.join(
-    __dirname,
+    process.cwd(),
     "articles",
     `${article.publishingDate}.json`
   );
-  const result = fs.writeFileSync(filePath, JSON.stringify(article), {});
+  const result = fs.writeFileSync(filePath, JSON.stringify(article));
 
   return result;
 }
