@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const { title } = require("process");
 
 async function getArticles() {
   const files = fs.readdirSync("/articles");
@@ -23,7 +24,25 @@ function createArticle(data) {
   return result;
 }
 
-async function updateArticle(id, data) {}
+async function updateArticle(publishingDate, data) {
+  const article = JSON.parse(
+    fs.readFileSync(`/articles/${publishingDate}.json`)
+  );
+  if (!article) throw new Error("article not found");
+
+  const updatedArticle = {
+    title: data?.title ?? article.title,
+    publishingDate,
+    content: data?.content ?? article.content,
+  };
+
+  fs.writeFileSync(
+    `/articles/${publishingDate}.json`,
+    JSON.stringify(updatedArticle)
+  );
+
+  return updatedArticle;
+}
 
 async function deleteArticle(id) {}
 
