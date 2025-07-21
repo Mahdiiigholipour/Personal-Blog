@@ -1,66 +1,61 @@
-async function getArticles(req, res, next) {
+const BlogService = require("../services/blog");
+
+function getArticles(req, res, next) {
   try {
-    const articles = await BlogService.getArticles();
-    res.json(articles);
+    const articles = BlogService.getArticles();
   } catch (err) {
     next(err);
   }
 }
 
-async function createArticle(req, res, next) {
+function createArticle(req, res, next) {
   try {
     const { title, publishingDate, content } = req?.body;
-    const result = await BlogService.createArticle({
+    const result = BlogService.createArticle({
       title,
       publishingDate,
       content,
     });
-    res.json(result);
   } catch (err) {
     next(err);
   }
 }
 
-async function updateArtice(req, res, next) {
+function updateArtice(req, res, next) {
   try {
-    const { id } = req?.params;
-    const { title, publishingDate, content } = req?.body;
+    const { publishingDate } = req?.params;
+    const { title, newpublishingDate = publishingDate, content } = req?.body;
 
-    const result = await BlogService.updateArticle(id, {
+    const result = BlogService.updateArticle(publishingDate, {
       title,
-      publishingDate,
+      newpublishingDate,
       content,
     });
-    res.json(result);
   } catch (err) {
     next(err);
   }
 }
 
-async function deleteArticle(req, res, next) {
+function deleteArticle(req, res, next) {
   try {
-    const { id } = req?.params;
-    const result = await BlogService.deleteArticle(id);
-    res.json(result);
+    const { publishingDate } = req?.params;
+    const result = BlogService.deleteArticle(publishingDate);
   } catch (err) {
     next(err);
   }
 }
 
-async function adminPage(req, res, next) {
+function adminPage(req, res, next) {
   try {
-    const result = await BlogService.adminPage();
-    res.json(result);
   } catch (err) {
     next(err);
   }
 }
 
-async function showArticle(req, res, next) {
+function showArticle(req, res, next) {
   try {
-    const { id } = req?.params;
-    const article = await BlogService.showArticle();
-    res.json(article);
+    const { publishingDate } = req?.params;
+    const article = BlogService.getArticleByDate(publishingDate);
   } catch (err) {
     next(err);
   }
