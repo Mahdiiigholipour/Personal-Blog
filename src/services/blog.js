@@ -1,9 +1,21 @@
 const fs = require("fs");
 const path = require("path");
 
-async function getArticles() {}
+async function getArticles() {
+  const articles = fs.readdir("/articles", (err, files) => {
+    if (err) throw new Error("some issue when read article directory!");
+    const temp = files.map((filename) => {
+      fs.readFile(filename, "utf-8", (err, data) => {
+        if (err) throw new Error("some issue when read files in article!");
+        return data;
+      });
+    });
+  });
 
-async function createArticle(data) {
+  return articles;
+}
+
+function createArticle(data) {
   const article = {
     title: data?.title || "Unknown article",
     publishingDate: data?.publishingDate || Date.now(),
