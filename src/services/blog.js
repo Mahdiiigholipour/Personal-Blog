@@ -61,3 +61,12 @@ function getArticleByDate(publishingDate) {
 
   return article;
 }
+
+const BlogService = {
+  createArticle,
+  getArticles,
+  updateArticle,
+  deleteArticle,
+  getArticleByDate,
+};
+module.exports = BlogService;
