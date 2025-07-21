@@ -46,7 +46,11 @@ async function updateArticle(publishingDate, data) {
   return updatedArticle;
 }
 
-async function deleteArticle(id) {}
+async function deleteArticle(publishingDate) {
+  fs.unlinkSync(`/articles/${publishingDate}.json`);
+
+  return true;
+}
 
 async function adminPage() {}
 
