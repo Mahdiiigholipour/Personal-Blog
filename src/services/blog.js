@@ -28,9 +28,12 @@ function createArticle(data) {
 }
 
 function updateArticle(publishingDate, data) {
-  const article = JSON.parse(
-    fs.readFileSync(`/articles/${publishingDate}.json`)
+  const filePath = path.join(
+    process.cwd(),
+    "articles",
+    `${publishingDate}.json`
   );
+  const article = JSON.parse(fs.readFileSync(filePath));
   if (!article) throw new Error("article not found");
 
   const updatedArticle = {
@@ -39,10 +42,7 @@ function updateArticle(publishingDate, data) {
     content: data?.content ?? article.content,
   };
 
-  fs.writeFileSync(
-    `/articles/${publishingDate}.json`,
-    JSON.stringify(updatedArticle)
-  );
+  fs.writeFileSync(filePath, JSON.stringify(updatedArticle));
 
   return updatedArticle;
 }
