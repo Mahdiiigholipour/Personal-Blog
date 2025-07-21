@@ -22,13 +22,9 @@ function createArticle(data) {
     content: data?.content || "",
   };
 
-  const result = fs.writeFile(
+  const result = fs.writeFileSync(
     `/articles/${article.publishingDate}.json`,
-    JSON.stringify(article),
-    (err) => {
-      if (err) throw new Error("cant write file!");
-      return true;
-    }
+    JSON.stringify(article)
   );
 
   return result;
