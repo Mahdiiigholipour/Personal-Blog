@@ -52,7 +52,7 @@ function adminPage(req, res, next) {
   }
 }
 
-function showArticle(req, res, next) {
+function getOneArticle(req, res, next) {
   try {
     const { publishingDate } = req?.params;
     const article = BlogService.getArticleByDate(publishingDate);
@@ -66,6 +66,6 @@ module.exports = {
   createArticle,
   deleteArticle,
   getArticles,
-  showArticle,
+  getOneArticle,
   updateArtice,
 };

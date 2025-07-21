@@ -1,10 +1,19 @@
+const {
+  getArticles,
+  createArticle,
+  adminPage,
+  getOneArticle,
+  updateArtice,
+  deleteArticle,
+} = require("./controllers/blog");
+
 const router = require("express").Router();
 
-router.get("/home");
-router.post("/new");
-router.get("/admin");
-router.get("/article/:id");
-router.put("/edit/:id");
-router.delete("/delete/:id");
+router.get("/home", getArticles);
+router.post("/new", createArticle);
+router.get("/admin", adminPage);
+router.get("/article/:publishingDate", getOneArticle);
+router.put("/edit/:publishingDate", updateArtice);
+router.delete("/delete/:publishingDate", deleteArticle);
 
 module.exports = router;
