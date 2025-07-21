@@ -48,7 +48,12 @@ function updateArticle(publishingDate, data) {
 }
 
 function deleteArticle(publishingDate) {
-  fs.unlinkSync(`/articles/${publishingDate}.json`);
+  const filePath = path.join(
+    process.cwd(),
+    "articles",
+    `${publishingDate}.json`
+  );
+  fs.unlinkSync(filePath);
 
   return true;
 }
