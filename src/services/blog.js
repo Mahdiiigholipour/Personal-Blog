@@ -3,9 +3,11 @@ const path = require("path");
 const { title } = require("process");
 
 function getArticles() {
-  const files = fs.readdirSync("/articles");
+  const dirPath = path.join(process.cwd(), "articles");
+  const files = fs.readdirSync(dirPath);
+  console.log("readdir passed");
   const articles = files.map((filename) =>
-    JSON.parse(fs.readFileSync(filename, "utf-8"))
+    JSON.parse(fs.readFileSync(path.join(dirPath, filename)))
   );
 
   return articles;
