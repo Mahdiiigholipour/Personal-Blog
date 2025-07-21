@@ -54,4 +54,4 @@ async function deleteArticle(publishingDate) {
 
 async function adminPage() {}
 
-async function showArticle(id) {}
+async function showArticle(publishingDate) {}
