@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const { title } = require("process");
 
-async function getArticles() {
+function getArticles() {
   const files = fs.readdirSync("/articles");
   const articles = files.map((filename) =>
     JSON.parse(fs.readFileSync(filename, "utf-8"))
@@ -17,16 +17,17 @@ function createArticle(data) {
     publishingDate: data?.publishingDate || Date.now(),
     content: data?.content || "",
   };
-
-  const result = fs.writeFileSync(
-    `/articles/${article.publishingDate}.json`,
-    JSON.stringify(article)
+  const filePath = path.join(
+    __dirname,
+    "articles",
+    `${article.publishingDate}.json`
   );
+  const result = fs.writeFileSync(filePath, JSON.stringify(article), {});
 
   return result;
 }
 
-async function updateArticle(publishingDate, data) {
+function updateArticle(publishingDate, data) {
   const article = JSON.parse(
     fs.readFileSync(`/articles/${publishingDate}.json`)
   );
@@ -46,13 +47,13 @@ async function updateArticle(publishingDate, data) {
   return updatedArticle;
 }
 
-async function deleteArticle(publishingDate) {
+function deleteArticle(publishingDate) {
   fs.unlinkSync(`/articles/${publishingDate}.json`);
 
   return true;
 }
 
-async function getArticleByDate(publishingDate) {
+function getArticleByDate(publishingDate) {
   const article = JSON.parse(
     fs.readFileSync(`/articles/${publishingDate}.json`)
   );
