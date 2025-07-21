@@ -2,15 +2,8 @@ const fs = require("fs");
 const path = require("path");
 
 async function getArticles() {
-  const articles = fs.readdir("/articles", (err, files) => {
-    if (err) throw new Error("some issue when read article directory!");
-    const temp = files.map((filename) => {
-      fs.readFile(filename, "utf-8", (err, data) => {
-        if (err) throw new Error("some issue when read files in article!");
-        return data;
-      });
-    });
-  });
+  const files = fs.readdirSync("/articles");
+  const articles = files.map((filename) => fs.readFileSync(filename, "utf-8"));
 
   return articles;
 }
