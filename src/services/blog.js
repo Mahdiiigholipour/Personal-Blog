@@ -54,4 +54,11 @@ async function deleteArticle(publishingDate) {
 
 async function adminPage() {}
 
-async function showArticle(publishingDate) {}
+async function getArticleByDate(publishingDate) {
+  const article = JSON.parse(
+    fs.readFileSync(`/articles/${publishingDate}.json`)
+  );
+  if (!article) throw new Error("not found any article");
+
+  return article;
+}
