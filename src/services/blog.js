@@ -4,7 +4,9 @@ const { title } = require("process");
 
 async function getArticles() {
   const files = fs.readdirSync("/articles");
-  const articles = files.map((filename) => fs.readFileSync(filename, "utf-8"));
+  const articles = files.map((filename) =>
+    JSON.parse(fs.readFileSync(filename, "utf-8"))
+  );
 
   return articles;
 }
