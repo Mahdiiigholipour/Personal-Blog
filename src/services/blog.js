@@ -52,8 +52,6 @@ async function deleteArticle(publishingDate) {
   return true;
 }
 
-async function adminPage() {}
-
 async function getArticleByDate(publishingDate) {
   const article = JSON.parse(
     fs.readFileSync(`/articles/${publishingDate}.json`)
