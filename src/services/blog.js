@@ -59,9 +59,12 @@ function deleteArticle(publishingDate) {
 }
 
 function getArticleByDate(publishingDate) {
-  const article = JSON.parse(
-    fs.readFileSync(`/articles/${publishingDate}.json`)
+  const filePath = path.join(
+    process.cwd(),
+    "articles",
+    `${publishingDate}.json`
   );
+  const article = JSON.parse(fs.readFileSync(filePath));
   if (!article) throw new Error("not found any article");
 
   return article;
