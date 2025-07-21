@@ -1,7 +1,7 @@
 async function getArticles(req, res, next) {
   try {
     const articles = await BlogService.getArticles();
-    res.json();
+    res.json(articles);
   } catch (err) {
     next(err);
   }
@@ -15,6 +15,7 @@ async function createArticle(req, res, next) {
       publishingDate,
       content,
     });
+    res.json(result);
   } catch (err) {
     next(err);
   }
@@ -30,6 +31,7 @@ async function updateArtice(req, res, next) {
       publishingDate,
       content,
     });
+    res.json(result);
   } catch (err) {
     next(err);
   }
@@ -39,6 +41,7 @@ async function deleteArticle(req, res, next) {
   try {
     const { id } = req?.params;
     const result = await BlogService.deleteArticle(id);
+    res.json(result);
   } catch (err) {
     next(err);
   }
@@ -47,6 +50,7 @@ async function deleteArticle(req, res, next) {
 async function adminPage(req, res, next) {
   try {
     const result = await BlogService.adminPage();
+    res.json(result);
   } catch (err) {
     next(err);
   }
@@ -56,6 +60,7 @@ async function showArticle(req, res, next) {
   try {
     const { id } = req?.params;
     const article = await BlogService.showArticle();
+    res.json(article);
   } catch (err) {
     next(err);
   }
