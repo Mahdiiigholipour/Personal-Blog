@@ -1,6 +1,5 @@
 const fs = require("fs");
 const path = require("path");
-const { title } = require("process");
 
 function getArticles() {
   const dirPath = path.join(process.cwd(), "articles");

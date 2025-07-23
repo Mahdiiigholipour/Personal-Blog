@@ -1,4 +1,4 @@
-const BlogService = require("../services/blog");
+const BlogService = require("./service");
 
 function getArticles(req, res, next) {
   try {
