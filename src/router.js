@@ -6,12 +6,13 @@ const {
   updateArtice,
   deleteArticle,
 } = require("./controllers/blog");
+const authMiddleware = require("./middleware/auth");
 
 const router = require("express").Router();
 
 router.get("/home", getArticles);
 router.post("/new", createArticle);
-router.get("/admin", adminPage);
+router.get("/admin", authMiddleware, adminPage);
 router.get("/article/:publishingDate", getOneArticle);
 router.put("/edit/:publishingDate", updateArtice);
 router.delete("/delete/:publishingDate", deleteArticle);
