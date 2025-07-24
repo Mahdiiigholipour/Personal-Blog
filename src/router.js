@@ -5,7 +5,7 @@ const {
   getOneArticle,
   updateArtice,
   deleteArticle,
-} = require("./controllers/blog");
+} = require("./blog/controller.js");
 const authMiddleware = require("./middleware/auth");
 
 const router = require("express").Router();
