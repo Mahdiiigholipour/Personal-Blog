@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dashboard</title>
+  </head>
+  <body>
+    <h1>Admin Dashboard</h1>
+    <a href="/admin/add">Add New Article</a>
+    <ul>
+      <% articles.forEach(article => { %>
+      <li>
+        <strong><%= article.title %></strong> - <%= article.date %>
+        <a href="/admin/edit/<%= article.id %>">Edit</a> |
+        <a href="/admin/delete/<%= article.id %>">Delete</a>
+      </li>
+      <% }) %>
+    </ul>
+  </body>
+</html>
