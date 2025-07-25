@@ -1,41 +1,36 @@
-const fs = require("fs");
-const path = require("path");
+const {
+  writeArticleFile,
+  readArticlesDir,
+  readArticleFile,
+  deleteArticleFile,
+} = require("../utils/fsHelper");
 
-function getArticles() {
-  const dirPath = path.join(process.cwd(), "articles");
-  const files = fs.readdirSync(dirPath);
-  console.log("readdir passed");
-  const articles = files.map((filename) =>
-    JSON.parse(fs.readFileSync(path.join(dirPath, filename)))
+async function getArticles() {
+  const files = await readArticlesDir();
+
+  const articles = await Promise.all(
+    files.map(async (file) => JSON.parse(await readArticleFile(file)))
   );
-
   return articles;
 }
 
-function createArticle(data) {
+async function createArticle(data) {
   const article = {
+    id: data.publishingDate,
     title: data?.title || "Unknown article",
     publishingDate: data?.publishingDate || Date.now(),
     content: data?.content || "",
   };
-  const filePath = path.join(
-    process.cwd(),
-    "articles",
-    `${article.publishingDate}.json`
-  );
-  const result = fs.writeFileSync(filePath, JSON.stringify(article));
 
-  return result;
+  await writeArticleFile(`${article.id}.json`, article);
+  return article;
 }
 
-function updateArticle(publishingDate, data) {
-  const filePath = path.join(
-    process.cwd(),
-    "articles",
-    `${publishingDate}.json`
-  );
-  const article = JSON.parse(fs.readFileSync(filePath));
-  if (!article) throw new Error("article not found");
+async function updateArticle(id, data) {
+  const filename = `${id}.json`;
+
+  const isExist = await readArticleFile(filename);
+  if (!isExist) throw new Error("article not found");
 
   const updatedArticle = {
     title: data?.title ?? article.title,
@@ -43,29 +38,23 @@ function updateArticle(publishingDate, data) {
     content: data?.content ?? article.content,
   };
 
-  fs.writeFileSync(filePath, JSON.stringify(updatedArticle));
+  await writeArticleFile(`${id}.json`, updatedArticle);
 
   return updatedArticle;
 }
 
-function deleteArticle(publishingDate) {
-  const filePath = path.join(
-    process.cwd(),
-    "articles",
-    `${publishingDate}.json`
-  );
-  fs.unlinkSync(filePath);
+async function deleteArticle(id) {
+  const filename = `${id}.json`;
 
+  const isExist = await readArticleFile(filename);
+  if (!isExist) throw new Error("article not found");
+
+  await deleteArticleFile(filename);
   return true;
 }
 
-function getArticleByDate(publishingDate) {
-  const filePath = path.join(
-    process.cwd(),
-    "articles",
-    `${publishingDate}.json`
-  );
-  const article = JSON.parse(fs.readFileSync(filePath));
+async function getArticleById(id) {
+  const article = JSON.parse(await readArticleFile(`${id}.json`));
   if (!article) throw new Error("not found any article");
 
   return article;
@@ -76,6 +65,6 @@ const BlogService = {
   getArticles,
   updateArticle,
   deleteArticle,
-  getArticleByDate,
+  getArticleById,
 };
 module.exports = BlogService;

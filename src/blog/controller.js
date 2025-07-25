@@ -52,7 +52,7 @@ async function deleteArticle(req, res, next) {
 async function getOneArticle(req, res, next) {
   try {
     const { id } = req?.params;
-    const article = await service.getArticleByDate(id);
+    const article = await service.getArticleById(id);
     res.render("article.ejs", { article });
   } catch (err) {
     next(err);
@@ -78,7 +78,7 @@ function addPage(req, res, next) {
 async function editPage(req, res, next) {
   try {
     const { id } = req.params;
-    const article = await service.getArticleByDate(id);
+    const article = await service.getArticleById(id);
     res.render("admin/edit.ejs", { article });
   } catch (err) {
     next(err);
