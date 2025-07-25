@@ -12,14 +12,13 @@ const authMiddleware = require("./middleware/auth");
 
 const router = require("express").Router();
 
-router.post("/new", createArticle);
-router.put("/edit/:publishingDate", updateArtice);
-router.delete("/delete/:publishingDate", deleteArticle);
 router.get("/home", getArticles);
 router.get("/article/:publishingDate", getOneArticle);
+
 router.use(authMiddleware);
 router.get("/admin/dashboard", dashboardPage);
-router.get("/admin/add", addPage);
-router.get("/admin/edit", editPage);
+router.use("/admin/add").get(addPage).post(createArticle);
+router.use("/admin/edit/:publishingDate").get(editPage).put(updateArtice);
+router.delete("admin/delete/:publishingDate", deleteArticle);
 
 module.exports = router;
