@@ -59,7 +59,7 @@ function getOneArticle(req, res, next) {
 function dashboardPage(req, res, next) {
   try {
     const articles = BlogService.getArticles();
-    res.render("/admin/dashboard", { articles });
+    res.render("admin/dashboard.ejs", { articles });
   } catch (err) {
     next(err);
   }
@@ -67,7 +67,7 @@ function dashboardPage(req, res, next) {
 
 function addPage(req, res, next) {
   try {
-    res.render("/admin/add.ejs", {});
+    res.render("admin/add.ejs", {});
   } catch (err) {
     next(err);
   }
@@ -75,7 +75,7 @@ function addPage(req, res, next) {
 function editPage(req, res, next) {
   try {
     const article = BlogService.getArticleByDate(req?.params?.publishingDate);
-    res.render("/admin/edit.ejs");
+    res.render("admin/edit.ejs", { article });
   } catch (err) {
     next(err);
   }
