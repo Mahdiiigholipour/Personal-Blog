@@ -17,8 +17,8 @@ router.get("/article/:publishingDate", getOneArticle);
 
 router.use(authMiddleware);
 router.get("/admin/dashboard", dashboardPage);
-router.use("/admin/add").get(addPage).post(createArticle);
-router.use("/admin/edit/:publishingDate").get(editPage).put(updateArtice);
+router.route("/admin/add").get(addPage).post(createArticle);
+router.route("/admin/edit/:publishingDate").get(editPage).put(updateArtice);
 router.delete("admin/delete/:publishingDate", deleteArticle);
 
 module.exports = router;
