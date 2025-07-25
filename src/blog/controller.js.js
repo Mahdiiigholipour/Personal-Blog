@@ -33,6 +33,7 @@ function updateArticle(req, res, next) {
       newpublishingDate,
       content,
     });
+    res.redirect("/admin/dashboard");
   } catch (err) {
     next(err);
   }
@@ -42,6 +43,7 @@ function deleteArticle(req, res, next) {
   try {
     const { publishingDate } = req?.params;
     const result = BlogService.deleteArticle(publishingDate);
+    res.redirect("/admin/dashboard");
   } catch (err) {
     next(err);
   }
