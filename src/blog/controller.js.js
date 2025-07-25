@@ -45,13 +45,6 @@ function deleteArticle(req, res, next) {
   }
 }
 
-function adminPage(req, res, next) {
-  try {
-  } catch (err) {
-    next(err);
-  }
-}
-
 function getOneArticle(req, res, next) {
   try {
     const { publishingDate } = req?.params;
@@ -61,8 +54,17 @@ function getOneArticle(req, res, next) {
   }
 }
 
+function dashboardPage(req, res, next) {
+  try {
+    const articles = BlogService.getArticles();
+    res.render("/admin/dashboard", { articles });
+  } catch (err) {
+    next(err);
+  }
+}
+
 module.exports = {
-  adminPage,
+  dashboardPage,
   createArticle,
   deleteArticle,
   getArticles,
