@@ -16,7 +16,7 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 app.use(router);
-app.get("/", (req, res) => res.send("test route"));
+// app.get("/", (req, res) => res.redirect("http://localhost:3000/home"));
 
 app.use(notfoundHandler);
 app.use(exceptionHandler);

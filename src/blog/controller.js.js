@@ -3,6 +3,7 @@ const BlogService = require("./service");
 function getArticles(req, res, next) {
   try {
     const articles = BlogService.getArticles();
+    res.render("home.ejs", { articles });
   } catch (err) {
     next(err);
   }
@@ -49,6 +50,7 @@ function getOneArticle(req, res, next) {
   try {
     const { publishingDate } = req?.params;
     const article = BlogService.getArticleByDate(publishingDate);
+    res.render("article.ejs", { article });
   } catch (err) {
     next(err);
   }
