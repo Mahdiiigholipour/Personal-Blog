@@ -1,5 +1,5 @@
 const express = require("express");
-const router = require("./router");
+const router = require("./blog/router");
 const path = require("path");
 const {
   notfoundHandler,
@@ -16,7 +16,6 @@ app.use(express.static("public"));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-app.get("/", (req, res) => res.redirect("http://localhost:3000/home"));
 app.use(router);
 
 app.use(notfoundHandler);

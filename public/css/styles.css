@@ -1,4 +1,4 @@
-/* public/styles.css */
+/* public/css/styles.css */
 
 body {
   font-family: Arial, sans-serif;
@@ -12,53 +12,168 @@ body {
 
 h1 {
   color: #0057a0;
+  margin-bottom: 20px;
 }
 
-a {
-  color: #007bff;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-ul {
-  list-style-type: none;
+/* لیست مقالات */
+ul.article-list {
+  list-style: none;
   padding: 0;
 }
 
-li {
-  padding: 8px 0;
+ul.article-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
   border-bottom: 1px solid #ddd;
 }
 
-form input[type="text"],
-form input[type="date"],
-form textarea {
-  display: block;
+.article-title {
+  font-weight: bold;
+  font-size: 1.1em;
+  color: #0057a0;
+}
+
+.article-date {
+  color: #888;
+  font-size: 0.9em;
+}
+
+/* دکمه‌ها */
+.btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9em;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-edit {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.btn-edit:hover {
+  background-color: #0056b3;
+}
+
+.btn-delete {
+  background-color: #dc3545;
+  color: #fff;
+  margin-left: 5px;
+}
+
+.btn-delete:hover {
+  background-color: #c82333;
+}
+
+/* فرم‌ها */
+.compact-form {
+  max-width: 600px;
+  margin: 0 auto 30px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 1em;
+}
+
+.form-group label {
+  margin-bottom: 0.5em;
+  font-weight: bold;
+}
+
+.form-group input[type="text"],
+.form-group input[type="date"],
+.form-group textarea {
   width: 100%;
   padding: 8px;
-  margin: 10px 0;
-  font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
 
-form button {
-  background-color: #28a745;
-  color: white;
-  padding: 10px 16px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
+/* نمایش یک مقاله */
+.article-container {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
 }
 
-form button:hover {
-  background-color: #218838;
+.article-header {
+  margin-bottom: 20px;
 }
 
-.dashboard-actions a {
-  margin-right: 10px;
+.article-title-large {
+  font-size: 2em;
+  font-weight: bold;
+  color: #0057a0;
+  margin-bottom: 0.5em;
+}
+
+.article-date-muted {
+  color: #888;
+  font-size: 0.9em;
+}
+
+.article-content {
+  line-height: 1.8;
+}
+
+/* Container عمومی */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* هدر */
+.site-header {
+  background-color: #0057a0;
+  color: #fff;
+  padding: 15px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.site-header .site-title {
+  margin: 0;
+  font-size: 1.5em;
+}
+
+.site-header .site-title a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.site-header nav {
+  display: inline-flex;
+  gap: 15px;
+}
+
+.nav-link {
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 0.95em;
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+}
+
+/* فوتر */
+.site-footer {
+  margin-top: 40px;
+  padding: 20px 0;
+  text-align: center;
+  font-size: 0.9em;
+  color: #888;
+  border-top: 1px solid #ddd;
 }

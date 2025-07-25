@@ -16,13 +16,13 @@ async function getArticles() {
 
 async function createArticle(data) {
   const article = {
-    id: data.publishingDate,
+    id: data?.publishingDate,
     title: data?.title || "Unknown article",
     publishingDate: data?.publishingDate || Date.now(),
     content: data?.content || "",
   };
 
-  await writeArticleFile(`${article.id}.json`, article);
+  await writeArticleFile(`${article.id}.json`, JSON.stringify(data));
   return article;
 }
 
@@ -38,7 +38,7 @@ async function updateArticle(id, data) {
     content: data?.content ?? article.content,
   };
 
-  await writeArticleFile(`${id}.json`, updatedArticle);
+  await writeArticleFile(`${id}.json`, JSON.stringify(updatedArticle));
 
   return updatedArticle;
 }
@@ -68,4 +68,3 @@ const BlogService = {
   getArticleById,
 };
 module.exports = BlogService;
-

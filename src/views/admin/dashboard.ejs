@@ -1,27 +1,30 @@
-<%- include("partials/header", { pageTitle: "Admin Dashboard" }) %>
+<%- include("../partials/header", { pageTitle: "Admin Dashboard" }) %>
 
 <h1>Admin Dashboard</h1>
-<p><a href="/admin/add">+ Add New Article</a></p>
+<p><a href="/admin/add" class="btn btn-edit">+ Add New Article</a></p>
 
-<ul>
-  <% articles.forEach(article => { const dateObj = new
-  Date(article.publishingDate); const formattedDate =
-  dateObj.toLocaleDateString("en-US", { year: "numeric", month: "long", day:
-  "numeric" }); %>
-  <li>
-    <strong><%= article.title %></strong>
-    - <%= formattedDate %> |
-    <a href="/admin/edit/<%= article.publishingDate %>">Edit</a>
-    |
-    <form
-      action="/admin/delete/<%= article.publishingDate %>"
-      method="POST"
-      style="display: inline"
-    >
-      <button type="submit">Delete</button>
-    </form>
-  </li>
+<ul class="article-list">
+  <% articles.forEach(article => {
+       const dateObj = new Date(article.publishingDate);
+       const formattedDate = dateObj.toLocaleDateString("en-US", {
+         year: "numeric", month: "long", day: "numeric"
+       });
+  %>
+    <li>
+      <span class="article-title"><%= article.title %></span>
+      <span class="article-date"><%= formattedDate %></span>
+      <div>
+        <a href="/admin/edit/<%= article.publishingDate %>"
+           class="btn btn-edit">
+          Edit
+        </a>
+        <form action="/admin/delete/<%= article.publishingDate %>"
+              method="POST" style="display:inline">
+          <button type="submit" class="btn btn-delete">Delete</button>
+        </form>
+      </div>
+    </li>
   <% }) %>
 </ul>
 
-<%- include("partials/footer") %>
+<%- include("../partials/footer") %>

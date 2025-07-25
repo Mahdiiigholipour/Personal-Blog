@@ -1,6 +1,7 @@
 const controller = require("./controller.js");
 const basicAuth = require("../middleware/basicAuth.js");
 const validate = require("../utils/validator.js");
+const { param, body } = require("express-validator");
 
 const router = require("express").Router();
 // Guest routes
@@ -21,7 +22,7 @@ router
   .post(
     [
       body("title").notEmpty(),
-      body("publishingDate").isNumeric(),
+      body("publishingDate").notEmpty(),
       body("content").notEmpty(),
     ],
     validate,

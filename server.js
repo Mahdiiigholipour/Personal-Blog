@@ -4,5 +4,5 @@ const { PORT } = require("./src/config/index");
 
 const server = http.createServer(app);
 server.listen(PORT, () =>
-  console.log(`Server is running on http://localhost:${config.PORT}`)
+  console.log(`Server is running on http://localhost:${PORT}`)
 );

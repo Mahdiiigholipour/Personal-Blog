@@ -1,24 +1,24 @@
-<%- include("partials/header", { pageTitle: "Add Article" }) %>
+<%- include("../partials/header", { pageTitle: "Add Article" }) %>
 
 <h1>Add a New Article</h1>
 
-<form action="/admin/add" method="POST">
-  <label>
-    Title:
-    <input type="text" name="title" required />
-  </label>
+<form action="/admin/add" method="POST" class="compact-form">
+  <div class="form-group">
+    <label for="title">Title</label>
+    <input id="title" type="text" name="title" required />
+  </div>
 
-  <label>
-    Content:
-    <textarea name="content" rows="8" required></textarea>
-  </label>
+  <div class="form-group">
+    <label for="content">Content</label>
+    <textarea id="content" name="content" rows="6" required></textarea>
+  </div>
 
-  <label>
-    Publishing Date:
-    <input type="date" name="publishingDate" required />
-  </label>
+  <div class="form-group">
+    <label for="publishingDate">Publishing Date</label>
+    <input id="publishingDate" type="date" name="publishingDate" required />
+  </div>
 
-  <button type="submit">Publish</button>
+  <button type="submit" class="btn btn-edit">Publish</button>
 </form>
 
-<%- include("partials/footer") %>
+<%- include("../partials/footer") %>
