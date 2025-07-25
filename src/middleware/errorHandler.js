@@ -4,12 +4,13 @@ function notfoundHandler(req, res, next) {
   });
 }
 
-function exceptionHandler(req, res, next) {
-  let status = err?.status ?? err?.statusCode ?? err?.code;
-  if (!status || isNaN(+status) || status > 511 || status < 200) status = 500;
-
+function exceptionHandler(err, req, res, next) {
+  let status = err.status || err.statusCode || err.code;
+  if (!status || isNaN(+status) || status < 200 || status > 511) {
+    status = 500;
+  }
   res.status(status).json({
-    message: err?.message ?? err?.msg ?? err?.stack ?? "internal server error",
+    message: err.message || err.msg || "internal server error",
   });
 }
 
