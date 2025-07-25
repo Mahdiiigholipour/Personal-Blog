@@ -1,16 +1,13 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= article.title %></title>
-    <link rel="stylesheet" href="/styles.css" />
-  </head>
-  <body>
-    <% const dateObj = new Date(article.publishingDate); const formattedDate =
-    dateObj.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day:
-    'numeric' }); %>
-    <h1><%= article.title %></h1>
-    <p><%= article.content %></p>
-    <p><strong>Published on:</strong> <%= formattedDate %></p>
-    <a href="/">Back to home</a>
-  </body>
-</html>
+<%- include("partials/header", { pageTitle: article.title }) %> <% const dateObj
+= new Date(article.publishingDate); const formattedDate =
+dateObj.toLocaleDateString("en-US", { year: "numeric", month: "long", day:
+"numeric" }); %>
+
+<h1><%= article.title %></h1>
+<p><em>Published on: <%= formattedDate %></em></p>
+<article>
+  <p><%= article.content %></p>
+</article>
+<p><a href="/">Back to Home</a></p>
+
+<%- include("partials/footer") %>
