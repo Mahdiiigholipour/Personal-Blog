@@ -23,7 +23,7 @@ function createArticle(req, res, next) {
   }
 }
 
-function updateArtice(req, res, next) {
+function updateArticle(req, res, next) {
   try {
     const { publishingDate } = req?.params;
     const { title, newpublishingDate = publishingDate, content } = req?.body;
@@ -87,7 +87,7 @@ module.exports = {
   deleteArticle,
   getArticles,
   getOneArticle,
-  updateArtice,
+  updateArticle,
   addPage,
   editPage,
 };
