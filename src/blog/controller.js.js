@@ -17,6 +17,7 @@ function createArticle(req, res, next) {
       publishingDate,
       content,
     });
+    res.render("admin/add.ejs");
   } catch (err) {
     next(err);
   }

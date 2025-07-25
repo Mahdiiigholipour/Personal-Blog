@@ -2,10 +2,11 @@
 <html>
   <head>
     <title>Edit Article</title>
+    <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
     <h1>Edit Article</h1>
-    <form action="/admin/edit/<%= article.id %>" method="POST">
+    <form action="/admin/edit/<%= article.publishingDate %>" method="POST">
       <input
         type="text"
         name="title"
@@ -16,7 +17,7 @@
       <input
         type="date"
         name="date"
-        value="<%= article.date %>"
+        value="<%= article.publishingDate %>"
         required
       /><br />
       <button type="submit">Update</button>
