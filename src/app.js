@@ -1,9 +1,9 @@
 const express = require("express");
-const router = require("./src/router");
+const router = require("./router");
 const {
   notfoundHandler,
   exceptionHandler,
-} = require("./src/middleware/errorHandler");
+} = require("./middleware/errorHandler");
 require("dotenv").config();
 const path = require("path");
 
