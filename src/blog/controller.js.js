@@ -70,6 +70,14 @@ function addPage(req, res, next) {
     next(err);
   }
 }
+function editPage(req, res, next) {
+  try {
+    const article = BlogService.getArticleByDate(req?.params?.publishingDate);
+    res.render("/admin/edit.ejs");
+  } catch (err) {
+    next(err);
+  }
+}
 module.exports = {
   dashboardPage,
   createArticle,
@@ -78,4 +86,5 @@ module.exports = {
   getOneArticle,
   updateArtice,
   addPage,
+  editPage,
 };
