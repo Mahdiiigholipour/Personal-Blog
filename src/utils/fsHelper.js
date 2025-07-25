@@ -11,3 +11,7 @@ async function readArticleFile(filename) {
   const filePath = path.resolve(articlesDir, filename);
   return fs.readFile(filePath, "utf8");
 }
+async function writeArticleFile(filename, data) {
+  const filePath = path.resolve(articlesDir, filename);
+  return fs.writeFile(filePath, data);
+}
