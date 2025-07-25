@@ -63,6 +63,13 @@ function dashboardPage(req, res, next) {
   }
 }
 
+function addPage(req, res, next) {
+  try {
+    res.render("/admin/add.ejs", {});
+  } catch (err) {
+    next(err);
+  }
+}
 module.exports = {
   dashboardPage,
   createArticle,
@@ -70,4 +77,5 @@ module.exports = {
   getArticles,
   getOneArticle,
   updateArtice,
+  addPage,
 };
