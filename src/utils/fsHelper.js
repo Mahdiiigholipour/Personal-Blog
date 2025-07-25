@@ -15,3 +15,14 @@ async function writeArticleFile(filename, data) {
   const filePath = path.resolve(articlesDir, filename);
   return fs.writeFile(filePath, data);
 }
+async function deleteArticleFile(filename) {
+  const filePath = path.resolve(articlesDir, filename);
+  return fs.unlink(filePath);
+}
+
+module.exports = {
+  readArticlesDir,
+  readArticleFile,
+  writeArticleFile,
+  deleteArticleFile,
+};
