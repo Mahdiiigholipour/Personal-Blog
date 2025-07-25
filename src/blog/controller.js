@@ -1,67 +1,67 @@
-const BlogService = require("./service");
+const service = require("./service");
 
-function getArticles(req, res, next) {
+async function getArticles(req, res, next) {
   try {
-    const articles = BlogService.getArticles();
+    const articles = await service.getArticles();
     res.render("home.ejs", { articles });
   } catch (err) {
     next(err);
   }
 }
 
-function createArticle(req, res, next) {
+async function createArticle(req, res, next) {
   try {
     const { title, publishingDate, content } = req?.body;
-    const result = BlogService.createArticle({
+    const article = await service.createArticle({
       title,
       publishingDate,
       content,
     });
-    res.render("admin/add.ejs");
-  } catch (err) {
-    next(err);
-  }
-}
-
-function updateArticle(req, res, next) {
-  try {
-    const { publishingDate } = req?.params;
-    const { title, newpublishingDate = publishingDate, content } = req?.body;
-
-    const result = BlogService.updateArticle(publishingDate, {
-      title,
-      newpublishingDate,
-      content,
-    });
-    res.redirect("/admin/dashboard");
-  } catch (err) {
-    next(err);
-  }
-}
-
-function deleteArticle(req, res, next) {
-  try {
-    const { publishingDate } = req?.params;
-    const result = BlogService.deleteArticle(publishingDate);
-    res.redirect("/admin/dashboard");
-  } catch (err) {
-    next(err);
-  }
-}
-
-function getOneArticle(req, res, next) {
-  try {
-    const { publishingDate } = req?.params;
-    const article = BlogService.getArticleByDate(publishingDate);
     res.render("article.ejs", { article });
   } catch (err) {
     next(err);
   }
 }
 
-function dashboardPage(req, res, next) {
+async function updateArticle(req, res, next) {
   try {
-    const articles = BlogService.getArticles();
+    const { id } = req?.params;
+    const { title, publishingDate, content } = req?.body;
+
+    const article = await service.updateArticle(id, {
+      title,
+      publishingDate,
+      content,
+    });
+    res.render("article.ejs", { article });
+  } catch (err) {
+    next(err);
+  }
+}
+
+async function deleteArticle(req, res, next) {
+  try {
+    const { id } = req?.params;
+    await service.deleteArticle(id);
+    res.redirect("/admin/dashboard.ejs");
+  } catch (err) {
+    next(err);
+  }
+}
+
+async function getOneArticle(req, res, next) {
+  try {
+    const { id } = req?.params;
+    const article = await service.getArticleByDate(id);
+    res.render("article.ejs", { article });
+  } catch (err) {
+    next(err);
+  }
+}
+
+async function dashboardPage(req, res, next) {
+  try {
+    const articles = await service.getArticles();
     res.render("admin/dashboard.ejs", { articles });
   } catch (err) {
     next(err);
@@ -75,9 +75,10 @@ function addPage(req, res, next) {
     next(err);
   }
 }
-function editPage(req, res, next) {
+async function editPage(req, res, next) {
   try {
-    const article = BlogService.getArticleByDate(req?.params?.publishingDate);
+    const { id } = req.params;
+    const article = await service.getArticleByDate(id);
     res.render("admin/edit.ejs", { article });
   } catch (err) {
     next(err);
