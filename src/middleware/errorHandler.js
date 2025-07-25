@@ -5,12 +5,14 @@ function notfoundHandler(req, res, next) {
 }
 
 function exceptionHandler(err, req, res, next) {
-  let status = err.status || err.statusCode || err.code;
-  if (!status || isNaN(+status) || status < 200 || status > 511) {
-    status = 500;
-  }
-  res.status(status).json({
-    message: err.message || err.msg || "internal server error",
+  console.log(err.stack);
+
+  const status = err.statusCode || 500;
+  const message = err.message || "Internal Server Error";
+
+  res.status(status).render("500", {
+    status,
+    message,
   });
 }
 
