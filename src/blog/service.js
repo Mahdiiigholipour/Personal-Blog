@@ -16,13 +16,14 @@ async function getArticles() {
 
 async function createArticle(data) {
   const article = {
-    id: data?.publishingDate,
-    title: data?.title || "Unknown article",
-    publishingDate: data?.publishingDate || Date.now(),
-    content: data?.content || "",
+    id: Date.now(),
+    title: data?.title ?? "Unknown article",
+    publishingDate: data?.publishingDate ?? Date.now(),
+    content: data?.content ?? "",
   };
+  console.log(article);
 
-  await writeArticleFile(`${article.id}.json`, JSON.stringify(data));
+  await writeArticleFile(`${article.id}.json`, JSON.stringify(article));
   return article;
 }
 
@@ -34,7 +35,7 @@ async function updateArticle(id, data) {
 
   const updatedArticle = {
     title: data?.title ?? article.title,
-    publishingDate,
+    publishingDate: data?.publishingDate,
     content: data?.content ?? article.content,
   };
 

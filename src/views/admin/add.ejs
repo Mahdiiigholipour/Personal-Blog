@@ -2,7 +2,7 @@
 
 <h1>Add a New Article</h1>
 
-<form action="/admin/add" method="POST" class="compact-form">
+<form id="postForm" action="/admin/add" method="POST" class="compact-form">
   <div class="form-group">
     <label for="title">Title</label>
     <input id="title" type="text" name="title" required />
@@ -14,11 +14,16 @@
   </div>
 
   <div class="form-group">
-    <label for="publishingDate">Publishing Date</label>
-    <input id="publishingDate" type="date" name="publishingDate" required />
+    <label for="date">Publishing Date</label>
+    <input id="date" type="date" required />
   </div>
+
+  <input type="hidden" name="publishingDate" id="publishingDate" />
 
   <button type="submit" class="btn btn-edit">Publish</button>
 </form>
+
+<!-- ✅ اسکریپت خارجی -->
+<script src="/js/handleDate.js"></script>
 
 <%- include("../partials/footer") %>

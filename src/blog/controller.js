@@ -27,6 +27,7 @@ async function updateArticle(req, res, next) {
   try {
     const { id } = req?.params;
     const { title, publishingDate, content } = req?.body;
+    
 
     const article = await service.updateArticle(id, {
       title,

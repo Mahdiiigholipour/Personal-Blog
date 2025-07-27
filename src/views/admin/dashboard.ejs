@@ -14,11 +14,11 @@
       <span class="article-title"><%= article.title %></span>
       <span class="article-date"><%= formattedDate %></span>
       <div>
-        <a href="/admin/edit/<%= article.publishingDate %>"
+        <a href="/admin/edit/<%= article.id %>"
            class="btn btn-edit">
           Edit
         </a>
-        <form action="/admin/delete/<%= article.publishingDate %>"
+        <form action="/admin/delete/<%= article.id %>"
               method="POST" style="display:inline">
           <button type="submit" class="btn btn-delete">Delete</button>
         </form>

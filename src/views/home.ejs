@@ -4,7 +4,7 @@
 
 <ul class="article-list">
   <% articles.forEach(article => { const dateObj = new
-  Date(article.publishingDate); const formattedDate =
+  Date(+article.publishingDate); const formattedDate =
   dateObj.toLocaleDateString("en-US", { year: "numeric", month: "long", day:
   "numeric" }); %>
   <li>

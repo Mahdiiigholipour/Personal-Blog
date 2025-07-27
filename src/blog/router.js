@@ -8,18 +8,18 @@ const router = require("express").Router();
 router.get("/", controller.getArticles);
 router.get(
   "/article/:id",
-  [param("id").isNumeric()],
+  [param("id").notEmpty()],
   validate,
   controller.getOneArticle
 );
 
 // Admin routes
-router.use(basicAuth);
-router.get("/admin/dashboard", controller.dashboardPage);
+router.get("/admin/dashboard", basicAuth, controller.dashboardPage);
 router
   .route("/admin/add")
-  .get(controller.addPage)
+  .get(basicAuth, controller.addPage)
   .post(
+    basicAuth,
     [
       body("title").notEmpty(),
       body("publishingDate").notEmpty(),
@@ -31,8 +31,9 @@ router
 
 router
   .route("/admin/edit/:id")
-  .get(controller.editPage)
-  .put(
+  .get(basicAuth, controller.editPage)
+  .post(
+    basicAuth,
     [
       param("id").isNumeric(),
       body("title").optional().notEmpty(),
@@ -43,6 +44,6 @@ router
     controller.updateArticle
   );
 
-router.delete("admin/delete/:id", controller.deleteArticle);
+router.delete("admin/delete/:id", basicAuth, controller.deleteArticle);
 
 module.exports = router;

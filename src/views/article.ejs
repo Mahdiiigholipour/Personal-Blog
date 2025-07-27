@@ -3,12 +3,9 @@
 <div class="article-container">
   <div class="article-header">
     <h1 class="article-title-large"><%= article.title %></h1>
-    <% 
-      const dateObj = new Date(article.publishingDate);
-      const formattedDate = dateObj.toLocaleDateString("en-US", {
-        year: "numeric", month: "long", day: "numeric"
-      });
-    %>
+    <% const dateObj = new Date(+article.publishingDate); const formattedDate =
+    dateObj.toLocaleDateString("en-US", { year: "numeric", month: "long", day:
+    "numeric" }); %>
     <div class="article-date-muted">Published on: <%= formattedDate %></div>
   </div>
   <div class="article-content">
