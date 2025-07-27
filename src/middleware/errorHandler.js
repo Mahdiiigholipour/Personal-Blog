@@ -1,7 +1,5 @@
 function notfoundHandler(req, res, next) {
-  res.status(404).json({
-    message: "not found route",
-  });
+  res.status(404).render("404.ejs", { url: req?.url });
 }
 
 function exceptionHandler(err, req, res, next) {
