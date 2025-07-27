@@ -27,7 +27,6 @@ async function updateArticle(req, res, next) {
   try {
     const { id } = req?.params;
     const { title, publishingDate, content } = req?.body;
-    
 
     const article = await service.updateArticle(id, {
       title,
@@ -44,7 +43,7 @@ async function deleteArticle(req, res, next) {
   try {
     const { id } = req?.params;
     await service.deleteArticle(id);
-    res.redirect("/admin/dashboard.ejs");
+    res.redirect("/admin/dashboard");
   } catch (err) {
     next(err);
   }

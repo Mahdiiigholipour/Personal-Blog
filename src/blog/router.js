@@ -44,6 +44,6 @@ router
     controller.updateArticle
   );
 
-router.delete("admin/delete/:id", basicAuth, controller.deleteArticle);
+router.post("/admin/delete/:id", basicAuth, controller.deleteArticle);
 
 module.exports = router;
